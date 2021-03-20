@@ -13,7 +13,8 @@
   border: solid 0.1rem #000000;
 }
 .quiz_start,
-.quiz-question-container {
+.quiz-question-container,
+.submit-score {
   border: solid 0.1rem #000000;
   position: relative;
   margin-top: 20rem;

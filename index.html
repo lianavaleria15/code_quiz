@@ -11,7 +11,13 @@
     <!-- here display score and timer-->
     <header class="header_flex_container">
       <div id="display_scores" class="display-scores">
-        <a href="#" alt="display total score here"> Score:</a>
+        <a
+          href="./high-scores.html"
+          target="_black"
+          alt="display total score here"
+        >
+          View high-scores</a
+        >
       </div>
       <div class="timer">
         <div>Timer:<span id="timer">60</span></div>
@@ -39,6 +45,11 @@
         </div>
       </div>
       <!--here screen with final score and input button to submit score-->
+      <div id="submit-scores" class="submit-scores">
+        <form>
+          <input placeholder="add your initials here" />
+        </form>
+      </div>
     </main>
     <script src="./script.js"></script>
   </body>
