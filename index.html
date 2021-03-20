@@ -17,12 +17,28 @@
         <div>Timer:<span id="timer"></span></div>
       </div>
     </header>
-    <main class="quiz_content">
-      <h1>Code quiz</h1>
-      <div class="welcome-text">This is a coding quiz.</div>
-      <div class="container-start-button">
-        <button id="start_quiz_button" class="start-button">Start quiz</button>
+    <main>
+      <!--here display start screen with instructions and start button-->
+      <div class="quiz_start">
+        <h1>Code quiz</h1>
+        <div class="welcome-text">This is a coding quiz.</div>
+        <div class="container-start-button">
+          <button id="start_quiz_button" class="start-button">
+            Start quiz
+          </button>
+        </div>
       </div>
+      <!--here screen with questions which replaces start screen-->
+      <div class="quiz-question-container">
+        <h1 id="question">Question title</h1>
+        <div class="container-answers">
+          <button id="button-answer" class="button-answer">BUTTON 1</button>
+          <button id="button-answer" class="button-answer">BUTTON 2</button>
+          <button id="button-answer" class="button-answer">BUTTON 3</button>
+          <button id="button-answer" class="button-answer">BUTTON 4</button>
+        </div>
+      </div>
+      <!--here screen with final score and input button to submit score-->
     </main>
     <script src="./script.js"></script>
   </body>
