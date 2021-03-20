@@ -12,6 +12,8 @@ function startQuiz() {
     if (timeValue >= 0) {
       timerQuiz.textContent = timeValue;
       timeValue -= 1;
+    } else {
+      //here show form with initials
     }
   };
   // function executed every time a button is clicked
