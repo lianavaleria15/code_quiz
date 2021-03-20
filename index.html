@@ -9,14 +9,21 @@
   </head>
   <body>
     <!-- here display score and timer-->
-    <header>
-      <div>
-        <a href="#" alt="display total score here"></a>
+    <header class="header_flex_container">
+      <div id="display_scores" class="display-scores">
+        <a href="#" alt="display total score here"> Score:</a>
       </div>
-      <div>
-        <h1>Timer:<span></span></h1>
+      <div class="timer">
+        <div>Timer:<span id="timer"></span></div>
       </div>
     </header>
+    <main class="quiz_content">
+      <h1>Code quiz</h1>
+      <div class="welcome-text">This is a coding quiz.</div>
+      <div class="container-start-button">
+        <button id="start_quiz_button" class="start-button">Start quiz</button>
+      </div>
+    </main>
     <script src="./script.js"></script>
   </body>
 </html>

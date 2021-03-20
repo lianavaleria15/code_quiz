@@ -1,0 +1,49 @@
+.body {
+  margin: 0rem;
+}
+.header_flex_container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.display-scores,
+.timer {
+  margin: 1rem;
+  padding: 1rem;
+  border: solid 0.1rem #000000;
+}
+.quiz_content {
+  border: solid 0.1rem #000000;
+  position: relative;
+  margin-top: 20rem;
+  width: 50rem;
+  height: 100%;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -30%);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.quiz_content h1,
+.welcome-text {
+  text-align: center;
+  border-bottom: solid 0.1rem #000000;
+  padding: 1rem;
+  width: 100%;
+}
+
+.container-start-button {
+  margin-top: 10rem;
+  width: 100%;cd
+  height: 50%;
+  position: relative;
+}
+.start-button {
+  position: absolute;
+  padding: 1.5rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: solid 0.1rem #000000;
+}
