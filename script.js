@@ -20,39 +20,34 @@ function startQuiz() {
       //remove start quiz div from the DOM
       startQuizScreen.remove();
       //append submit scores form div
-      document.body.insertBefore(newForm);
     }
   };
   // function executed every time a button is clicked
   const timeAnswerQuestion = setInterval(callback, 1000);
+  //here declare function to create and append form
+  function createAndAppendForm() {
+    //create div
+    const divForm = document.createElement("div");
+    //create h4
+    const headingForm = document.createElement("h2");
+    //create div info submit scores
+    const infoSubmit = document.createElement("div");
+    //create input name and score
+    const inputScore = document.createElement("input");
+    // create submit scores button
+    const submitScoreButton = document.createElement("button");
+    //append child elements to body
+    bodyEl.appendChild(divForm);
+    bodyEl.appendChild(headingForm);
+    bodyEl.appendChild(infoSubmit);
+    bodyEl.appendChild(inputScore);
+    bodyEl.appendChild(submitScoreButton);
+    // add CSS style properties
+    divForm.setAttribute("class", submit - score - form);
+    headingForm.setAttribute("class", form - heading);
+    infoSubmit.setAttribute("class", submit - score - text);
+  }
 }
-
-//here declare function to create and append form
-function createAndAppendForm() {
-  const bodyEl = document.body;
-  //create div
-  const divForm = document.createElement("div");
-  //create h4
-  const headingForm = document.createElement("h4");
-  //create div info submit scores
-  const infoSubmit = document.createElement("div");
-  //create input name and score
-  const inputScore = document.createElement("input");
-  // create submit scores button
-  const submitScoreButton = document.createElement("button");
-  //append child elements to body
-  bodyEl.appendChild(divForm);
-  bodyEl.appendChild(headingForm);
-  bodyEl.appendChild(infoSubmit);
-  bodyEl.appendChild(inputScore);
-  bodyEl.appendChild(submitScoreButton);
-}
-
-// createAndAppendForm() => {
-const newForm = document.createElement("div");
-newForm.appendChild(body);
-// add new heading
-const formHeading = document.createElement("newForm");
 
 //store my questions in arrays
 // when users presses right answer, change question, vAriable that stores
