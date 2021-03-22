@@ -12,12 +12,13 @@
   padding: 1rem;
   border: solid 0.1rem #000000;
 }
-.quiz-start {
-  margin: 2git0rem;
+.quiz-start,
+.submit-score-form {
+  margin: 20rem;
   border: solid 0.1rem #000000;
   height: 25rem;
 }
-.quiz-header,
+.quiz-heading,
 .quiz-text {
   text-align: center;
 }

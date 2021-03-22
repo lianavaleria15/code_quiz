@@ -1,6 +1,6 @@
 // declare variables to target buttons in html file
 const timerQuiz = document.getElementById("timer");
-const startQuizButton = document.getElementById("start_quiz_button");
+const startQuizButton = document.getElementById("start-quiz-button");
 const startQuizScreen = document.getElementById("quiz-start");
 const header = document.getElementById("header-container");
 
@@ -20,10 +20,12 @@ function startQuiz() {
       //remove start quiz div from the DOM
       startQuizScreen.remove();
       //append submit scores form div
+      document.body.insertBefore(createAndAppendForm, header - container);
     }
   };
   // function executed every time a button is clicked
   const timeAnswerQuestion = setInterval(callback, 1000);
+
   //here declare function to create and append form
   function createAndAppendForm() {
     //create div
@@ -43,9 +45,9 @@ function startQuiz() {
     bodyEl.appendChild(inputScore);
     bodyEl.appendChild(submitScoreButton);
     // add CSS style properties
-    divForm.setAttribute("class", submit - score - form);
-    headingForm.setAttribute("class", form - heading);
-    infoSubmit.setAttribute("class", submit - score - text);
+    divForm.setAttribute("class", quiz - start);
+    headingForm.setAttribute("class", quiz - heading);
+    infoSubmit.setAttribute("class", quiz - text);
   }
 }
 
