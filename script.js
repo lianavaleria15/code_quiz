@@ -3,9 +3,12 @@ const timerQuiz = document.getElementById("timer");
 const startQuizButton = document.getElementById("start-quiz-button");
 const startQuizScreen = document.getElementById("quiz-start");
 const header = document.getElementById("header-container");
+// variable that targets the button element with answer
+const buttonAnswer = document.getElementsByClassName("button-answer");
 
-//initialize counter value
+//initialize timer value and total score counter value
 let timeValue = 5;
+let scoreQuiz = 0;
 
 // add event listener to start the quiz and timer
 startQuizButton.addEventListener("click", startQuiz);
@@ -53,3 +56,14 @@ function startQuiz() {
 
 //store my questions in arrays
 // when users presses right answer, change question, vAriable that stores
+
+// add function to count the number of correct answers
+countTotalScore = () => {
+  counterSpan.textContent = count;
+};
+
+// add event listener and function to check for the answer when answer button clicked
+buttonAnswer.addEventListener("click", verifyAnswer);
+const verifyAnswer = () => {
+  // here check if answer is correct, if yes counter incremented by one and if not display wrong message
+};
