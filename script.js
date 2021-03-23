@@ -3,6 +3,7 @@ const timerQuiz = document.getElementById("timer");
 const startQuizButton = document.getElementById("start-quiz-button");
 const startQuizScreen = document.getElementById("quiz-start");
 const header = document.getElementById("header-container");
+const bodyEl = document.body;
 
 // variable that targets the button element with answer
 const buttonAnswer = document.getElementsByClassName("button-answer");
@@ -14,7 +15,7 @@ let scoreQuiz = 0;
 //store my questions in arrays
 const quizQuestions = [
   {
-    question1: "Question1?",
+    question: "Question1?",
     answers: { a: "answer1", b: "answer2", c: "answer3", d: "answer4" },
     correctAnswer: "a",
   },
@@ -31,12 +32,17 @@ const quizQuestions = [
     correctAnswer: "b",
   },
   {
-    question1: "Question1?",
-    answers: { a: "answer1", b: "answer2", c: "answer3", d: "answer4" },
-    correctAnswer: "d",
+    question: "Question1?",
+    answers: {
+      a: "answer1",
+      b: "answer2",
+      c: "answer3",
+      d: "answer4",
+      correctAnswer: "d",
+    },
   },
   {
-    question1: "Question1?",
+    question: "Question1?",
     answers: { a: "answer1", b: "answer2", c: "answer3", d: "answer4" },
     correctAnswer: "a",
   },
@@ -46,9 +52,6 @@ const quizQuestions = [
 buildQuiz = () => {
   //declare variable to store clicked answer
 };
-
-// add event listener to start the quiz and timer
-startQuizButton.addEventListener("click", startQuiz);
 
 /* create countdown function*/
 function startQuiz() {
@@ -60,59 +63,63 @@ function startQuiz() {
       //remove start quiz div from the DOM
       startQuizScreen.remove();
       //append submit scores form div
-      document.body.insertBefore(createAndAppendForm, header - container);
+      createAndAppendForm();
+      // window.clearInterval();
     }
   };
   // function executed every time a button is clicked
   const timeAnswerQuestion = setInterval(callback, 1000);
 
   //here declare function to create and append form
-  function createAndAppendForm() {
+  const createAndAppendForm = () => {
     //create div
     const divForm = document.createElement("div");
+    bodyEl.appendChild(divForm);
+    divForm.setAttribute("class", "quiz - start");
     //create h4
     const headingForm = document.createElement("h2");
+    divForm.appendChild(headingForm);
+    headingForm.setAttribute("class", "quiz - heading");
     //create div info submit scores
     const infoSubmit = document.createElement("div");
+    divForm.appendChild(infoSubmit);
+    infoSubmit.setAttribute("class", "quiz - text");
     //create input name and score
     const inputScore = document.createElement("input");
+    divForm.appendChild(inputScore);
     // create submit scores button
     const submitScoreButton = document.createElement("button");
-    //append child elements to body
-    bodyEl.appendChild(divForm);
-    bodyEl.appendChild(headingForm);
-    bodyEl.appendChild(infoSubmit);
-    bodyEl.appendChild(inputScore);
-    bodyEl.appendChild(submitScoreButton);
-    // add CSS style properties
-    divForm.setAttribute("class", quiz - start);
-    headingForm.setAttribute("class", quiz - heading);
-    infoSubmit.setAttribute("class", quiz - text);
-  }
+    divForm.appendChild(submitScoreButton);
+  };
 }
+
+// add event listener to start the quiz and timer
+startQuizButton.addEventListener("click", startQuiz);
+
 //here function to create div element for quiz content
 createQuizContainer = () => {
-  // create div for questions screen
+  // create and append div for questions screen
   const divQuizContainer = document.createElement("div");
-  const questionContent = document.createElement("h2");
-  const answerButtonOne = document.createElement("button");
-  const answerButtonTwo = document.createElement("button");
-  const answerButtonThree = document.createElement("button");
-  const answerButtonFour = document.createElement("button");
-  //append quiz elements to the body
-  document.body.insertAfter(divQuizContainer, "header-container");
-  divQuizContainer.appendChild(questionContent);
-  divQuizContainer.appendChild(answerButtonOne);
-  divQuizContainer.appendChild(answerButtonTwo);
-  divQuizContainer.appendChild(answerButtonThree);
-  divQuizContainer.appendChild(answerButtonFour);
-  // add CSS style properties for quiz container elements
   divQuizContainer.setAttribute("class", quiz - start);
+
+  //create and append heading question
+  const questionContent = document.createElement("h2");
+  divQuizContainer.appendChild(questionContent);
   questionContent.setAttribute("class", quiz - heading);
+  //create and append buttons for answers
+  const answerButtonOne = document.createElement("button");
+  divQuizContainer.appendChild(answerButtonOne);
+  const answerButtonTwo = document.createElement("button");
+  divQuizContainer.appendChild(answerButtonTwo);
+  const answerButtonThree = document.createElement("button");
+  divQuizContainer.appendChild(answerButtonThree);
+  const answerButtonFour = document.createElement("button");
+  divQuizContainer.appendChild(answerButtonFour);
   answerButtonOne,
     answerButtonTwo,
     answerButtonThree,
     answerButtonFour.setAttribute("class", answer - button);
+  return createQuizContainer;
 };
 
 // when users presses right answer, change question, vAriable that stores
