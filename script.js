@@ -3,8 +3,40 @@ const timerQuiz = document.getElementById("timer");
 const startQuizButton = document.getElementById("start-quiz-button");
 const startQuizScreen = document.getElementById("quiz-start");
 const header = document.getElementById("header-container");
+
 // variable that targets the button element with answer
 const buttonAnswer = document.getElementsByClassName("button-answer");
+
+//store my questions in arrays
+const quizQuestions = [
+  {
+    question1: "Question1?",
+    answers: { a: "answer1", b: "answer2", c: "answer3", d: "answer4" },
+    correctAnswer: "a",
+  },
+  // store correct answer
+
+  {
+    question1: "Question1?",
+    answers: { a: "answer1", b: "answer2", c: "answer3", d: "answer4" },
+    correctAnswer: "c",
+  },
+  {
+    question1: "Question1?",
+    answers: { a: "answer1", b: "answer2", c: "answer3", d: "answer4" },
+    correctAnswer: "b",
+  },
+  {
+    question1: "Question1?",
+    answers: { a: "answer1", b: "answer2", c: "answer3", d: "answer4" },
+    correctAnswer: "d",
+  },
+  {
+    question1: "Question1?",
+    answers: { a: "answer1", b: "answer2", c: "answer3", d: "answer4" },
+    correctAnswer: "a",
+  },
+];
 
 //initialize timer value and total score counter value
 let timeValue = 5;
@@ -62,8 +94,21 @@ createQuizContainer = () => {
   const answerButtonTwo = document.createElement("button");
   const answerButtonThree = document.createElement("button");
   const answerButtonFour = document.createElement("button");
+  //append quiz elements to the body
+  document.body.insertAfter(divQuizContainer, "header-container");
+  divQuizContainer.appendChild(questionContent);
+  divQuizContainer.appendChild(answerButtonOne);
+  divQuizContainer.appendChild(answerButtonTwo);
+  divQuizContainer.appendChild(answerButtonThree);
+  divQuizContainer.appendChild(answerButtonFour);
+  // add CSS style properties for quiz container elements
+  divQuizContainer.setAttribute("class", quiz - start);
+  questionContent.setAttribute("class", quiz - heading);
+  answerButtonOne,
+    answerButtonTwo,
+    answerButtonThree,
+    answerButtonFour.setAttribute("class", answer - button);
 };
-//store my questions in arrays
 
 // when users presses right answer, change question, vAriable that stores
 
