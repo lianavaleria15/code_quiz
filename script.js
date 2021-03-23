@@ -7,6 +7,10 @@ const header = document.getElementById("header-container");
 // variable that targets the button element with answer
 const buttonAnswer = document.getElementsByClassName("button-answer");
 
+//initialize timer value and total score counter value
+let timeValue = 5;
+let scoreQuiz = 0;
+
 //store my questions in arrays
 const quizQuestions = [
   {
@@ -38,9 +42,10 @@ const quizQuestions = [
   },
 ];
 
-//initialize timer value and total score counter value
-let timeValue = 5;
-let scoreQuiz = 0;
+// here declare build quiz function
+buildQuiz = () => {
+  //declare variable to store clicked answer
+};
 
 // add event listener to start the quiz and timer
 startQuizButton.addEventListener("click", startQuiz);
