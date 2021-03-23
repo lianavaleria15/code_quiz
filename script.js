@@ -53,8 +53,18 @@ function startQuiz() {
     infoSubmit.setAttribute("class", quiz - text);
   }
 }
-
+//here function to create div element for quiz content
+createQuizContainer = () => {
+  // create div for questions screen
+  const divQuizContainer = document.createElement("div");
+  const questionContent = document.createElement("h2");
+  const answerButtonOne = document.createElement("button");
+  const answerButtonTwo = document.createElement("button");
+  const answerButtonThree = document.createElement("button");
+  const answerButtonFour = document.createElement("button");
+};
 //store my questions in arrays
+
 // when users presses right answer, change question, vAriable that stores
 
 // add function to count the number of correct answers
