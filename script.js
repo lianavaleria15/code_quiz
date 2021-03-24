@@ -54,12 +54,13 @@ buildQuiz = () => {
 };
 
 /* create countdown function*/
-function startQuiz() {
+const startQuiz = () => {
   const callback = function () {
     if (timeValue >= 0) {
       timerQuiz.textContent = timeValue;
       timeValue -= 1;
-    } else {
+    } else if (timeValue < 0) {
+      clearInterval(timerQuiz);
       //remove start quiz div from the DOM
       startQuizScreen.remove();
       //append submit scores form div
@@ -91,7 +92,7 @@ function startQuiz() {
     const submitScoreButton = document.createElement("button");
     divForm.appendChild(submitScoreButton);
   };
-}
+};
 
 // add event listener to start the quiz and timer
 startQuizButton.addEventListener("click", startQuiz);
