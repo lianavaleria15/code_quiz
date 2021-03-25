@@ -1,5 +1,6 @@
 // declare variables to target buttons in html file
 const timerQuiz = document.getElementById("timer");
+const quizContainer = document.getElementById("quiz-container");
 const startQuizButton = document.getElementById("start-quiz-button");
 const startQuizScreen = document.getElementById("quiz-start");
 const header = document.getElementById("header-container");
@@ -70,49 +71,39 @@ const createQuizContainer = (quizQuestion) => {
   questionContent.textContent = quizQuestion.question;
 
   const answerChoices = createAnswerChoices(quizQuestion.answers);
-
-  // divQuizContainer.appendChild(questionContent);
-  // questionContent.setAttribute("class", quiz - heading);
-  // //create and append buttons for answers
-  // const answerButtonOne = document.createElement("button");
-  // divQuizContainer.appendChild(answerButtonOne);
-  // const answerButtonTwo = document.createElement("button");
-  // divQuizContainer.appendChild(answerButtonTwo);
-  // const answerButtonThree = document.createElement("button");
-  // divQuizContainer.appendChild(answerButtonThree);
-  // const answerButtonFour = document.createElement("button");
-  // divQuizContainer.appendChild(answerButtonFour);
-  // answerButtonOne,
-  //   answerButtonTwo,
-  //   answerButtonThree,
-  //   answerButtonFour.setAttribute("class", answer - button);
-  // return createQuizContainer;
+  divQuizContainer.append(questionContent, answerChoices);
+  return divQuizContainer;
 };
 
-// here declare build quiz function
-buildSubmitScoresForm = () => {
-  //create div container
-  const divForm = document.createElement("div");
-  divForm.setAttribute("class", "quiz - start");
-  //create heading question
-  const headingForm = document.createElement("h2");
-  divForm.appendChild(headingForm);
-  headingForm.setAttribute("class", "quiz - heading");
-  //create div info submit scores
-  const infoSubmit = document.createElement("div");
-  divForm.appendChild(infoSubmit);
-  infoSubmit.setAttribute("class", "quiz - text");
-  //create input name and score
-  const inputScore = document.createElement("input");
-  divForm.appendChild(inputScore);
-  // create submit scores button
-  const submitScoreButton = document.createElement("button");
-  divForm.appendChild(submitScoreButton);
-};
+// // here declare build quiz function
+// buildSubmitScoresForm = () => {
+//   //create div container
+//   const divForm = document.createElement("div");
+//   divForm.setAttribute("class", "quiz - start");
+//   //create heading question
+//   const headingForm = document.createElement("h2");
+//   divForm.appendChild(headingForm);
+//   headingForm.setAttribute("class", "quiz - heading");
+//   //create div info submit scores
+//   const infoSubmit = document.createElement("div");
+//   divForm.appendChild(infoSubmit);
+//   infoSubmit.setAttribute("class", "quiz - text");
+//   //create input name and score
+//   const inputScore = document.createElement("input");
+//   divForm.appendChild(inputScore);
+//   // create submit scores button
+//   const submitScoreButton = document.createElement("button");
+//   divForm.appendChild(submitScoreButton);
+// };
 
 /* create countdown function*/
 const startQuiz = () => {
-  //here declare function to create and append form
+  //create question container
+  const question = createQuizContainer(quizQuestions[0]);
+  //remove start quiz div from the DOM
+  quizContainer.removeChild(startQuizScreen);
+  //append question container to the dom
+  quizContainer.appendChild(question);
 
   const callback = function () {
     if (timeValue >= 0) {
@@ -120,8 +111,7 @@ const startQuiz = () => {
       timeValue -= 1;
     } else if (timeValue < 0) {
       clearInterval(callback);
-      //remove start quiz div from the DOM
-      startQuizScreen.remove();
+
       //append submit scores form div
       // createAndAppendForm();
       // window.clearInterval();
