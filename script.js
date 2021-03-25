@@ -42,32 +42,45 @@ const quizQuestions = [
   },
 ];
 
+//create a function to display the answer choices
+const createAnswerChoices = (answers) => {
+  const createAnswerChoice = (answer) => {
+    const div = document.createElement("div");
+    const button = document.createElement("button");
+    button.setAttribute("data-answer", answer);
+    //append answer buttons to the div
+  };
+  answers.forEach(createAnswerChoice);
+};
 //here function to create div element for quiz content
-const createQuizContainer = (quizQuestions) => {
+const createQuizContainer = (quizQuestion) => {
   // create and append div for questions screen
   const divQuizContainer = document.createElement("div");
   divQuizContainer.setAttribute("id", "quiz - start");
-  divQuizContainer.setAttribute("data-answer", quizQuestions.correctAnswer);
+  divQuizContainer.setAttribute("data-answer", quizQuestion.correctAnswer);
 
   //create and append heading question
   const questionContent = document.createElement("h2");
+  questionContent.textContent = quizQuestion.question;
 
-  divQuizContainer.appendChild(questionContent);
-  questionContent.setAttribute("class", quiz - heading);
-  //create and append buttons for answers
-  const answerButtonOne = document.createElement("button");
-  divQuizContainer.appendChild(answerButtonOne);
-  const answerButtonTwo = document.createElement("button");
-  divQuizContainer.appendChild(answerButtonTwo);
-  const answerButtonThree = document.createElement("button");
-  divQuizContainer.appendChild(answerButtonThree);
-  const answerButtonFour = document.createElement("button");
-  divQuizContainer.appendChild(answerButtonFour);
-  answerButtonOne,
-    answerButtonTwo,
-    answerButtonThree,
-    answerButtonFour.setAttribute("class", answer - button);
-  return createQuizContainer;
+  const answerChoices = createAnswerChoices(quizQuestion.answers);
+
+  // divQuizContainer.appendChild(questionContent);
+  // questionContent.setAttribute("class", quiz - heading);
+  // //create and append buttons for answers
+  // const answerButtonOne = document.createElement("button");
+  // divQuizContainer.appendChild(answerButtonOne);
+  // const answerButtonTwo = document.createElement("button");
+  // divQuizContainer.appendChild(answerButtonTwo);
+  // const answerButtonThree = document.createElement("button");
+  // divQuizContainer.appendChild(answerButtonThree);
+  // const answerButtonFour = document.createElement("button");
+  // divQuizContainer.appendChild(answerButtonFour);
+  // answerButtonOne,
+  //   answerButtonTwo,
+  //   answerButtonThree,
+  //   answerButtonFour.setAttribute("class", answer - button);
+  // return createQuizContainer;
 };
 
 // here declare build quiz function
