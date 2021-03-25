@@ -6,9 +6,6 @@ const startQuizScreen = document.getElementById("quiz-start");
 const header = document.getElementById("header-container");
 const bodyEl = document.body;
 
-// variable that targets the button element with answer
-const buttonAnswer = document.getElementsByClassName("button-answer");
-
 //initialize timer value and total score counter value
 let timeValue = 5;
 let scoreQuiz = 0;
@@ -49,22 +46,24 @@ const createAnswerChoices = (answers) => {
   const createAnswerChoiceAndAppend = (answer) => {
     const div = document.createElement("div");
     const button = document.createElement("button");
-    button.setAttribute("data-answer", answer);
+    button.setAttribute(answer);
     //add text content to the button
     button.textContent = answer;
     //append answer buttons to the div
-    div.appendChild(button);
+    div.appendChild("data-answer", button);
     parentDiv.appendChild(div);
   };
   answers.forEach(createAnswerChoiceAndAppend);
   console.log(parentDiv);
 };
+
+const verifyAnswer = () => {};
 //here function to create div element for quiz content
 const createQuizContainer = (quizQuestion) => {
   // create and append div for questions screen
   const divQuizContainer = document.createElement("div");
   divQuizContainer.setAttribute("id", "quiz - start");
-  divQuizContainer.setAttribute("data-answer", quizQuestion.correctAnswer);
+  divQuizContainer.setAttribute(quizQuestions.correctAnswer);
 
   //create and append heading question
   const questionContent = document.createElement("h2");
@@ -72,7 +71,13 @@ const createQuizContainer = (quizQuestion) => {
 
   const answerChoices = createAnswerChoices(quizQuestion.answers);
   divQuizContainer.append(questionContent, answerChoices);
+  divQuizContainer.addEventListener("click", verifyAnswer);
   return divQuizContainer;
+};
+const renderQuestion = () => {
+  //append question container to the dom
+  const questionContainer = createQuizContainer(quizQuestions);
+  quizContainer.appendChild(questionContainer);
 };
 
 // // here declare build quiz function
@@ -98,12 +103,10 @@ const createQuizContainer = (quizQuestion) => {
 
 /* create countdown function*/
 const startQuiz = () => {
-  //create question container
-  const question = createQuizContainer(quizQuestions[0]);
   //remove start quiz div from the DOM
   quizContainer.removeChild(startQuizScreen);
-  //append question container to the dom
-  quizContainer.appendChild(question);
+
+  quizQuestions.forEach(renderQuestion);
 
   const callback = function () {
     if (timeValue >= 0) {
@@ -111,10 +114,6 @@ const startQuiz = () => {
       timeValue -= 1;
     } else if (timeValue < 0) {
       clearInterval(callback);
-
-      //append submit scores form div
-      // createAndAppendForm();
-      // window.clearInterval();
     }
   };
   const timeAnswerQuestion = setInterval(callback, 1000);
