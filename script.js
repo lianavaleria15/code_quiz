@@ -44,13 +44,19 @@ const quizQuestions = [
 
 //create a function to display the answer choices
 const createAnswerChoices = (answers) => {
-  const createAnswerChoice = (answer) => {
+  const parentDiv = document.createElement("div");
+  const createAnswerChoiceAndAppend = (answer) => {
     const div = document.createElement("div");
     const button = document.createElement("button");
     button.setAttribute("data-answer", answer);
+    //add text content to the button
+    button.textContent = answer;
     //append answer buttons to the div
+    div.appendChild(button);
+    parentDiv.appendChild(div);
   };
-  answers.forEach(createAnswerChoice);
+  answers.forEach(createAnswerChoiceAndAppend);
+  console.log(parentDiv);
 };
 //here function to create div element for quiz content
 const createQuizContainer = (quizQuestion) => {
@@ -117,7 +123,7 @@ const startQuiz = () => {
       //remove start quiz div from the DOM
       startQuizScreen.remove();
       //append submit scores form div
-      createAndAppendForm();
+      // createAndAppendForm();
       // window.clearInterval();
     }
   };
@@ -130,12 +136,12 @@ startQuizButton.addEventListener("click", startQuiz);
 // when users presses right answer, change question, vAriable that stores
 
 // add function to count the number of correct answers
-countTotalScore = () => {
-  counterSpan.textContent = count;
-};
+// countTotalScore = () => {
+//   counterSpan.textContent = count;
+// };
 
 // add event listener and function to check for the answer when answer button clicked
-buttonAnswer.addEventListener("click", verifyAnswer);
-const verifyAnswer = () => {
-  // here check if answer is correct, if yes counter incremented by one and if not display wrong message
-};
+// buttonAnswer.addEventListener("click", verifyAnswer);
+// const verifyAnswer = () => {
+//   // here check if answer is correct, if yes counter incremented by one and if not display wrong message
+// };
