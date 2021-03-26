@@ -6,9 +6,9 @@ const startQuizScreen = document.getElementById("quiz-start");
 const header = document.getElementById("header-container");
 const bodyEl = document.body;
 
-//initialize timer value and total score counter value
+//initialize timer value and index value for array of questions
 let timeValue = 5;
-let scoreQuiz = 0;
+let index = 0;
 
 //store my questions in arrays
 const quizQuestions = [
@@ -39,31 +39,53 @@ const quizQuestions = [
     correctAnswer: "answer1",
   },
 ];
+/* create countdown function*/
 
 //create a function to display the answer choices
 const createAnswerChoices = (answers) => {
   const parentDiv = document.createElement("div");
+
   const createAnswerChoiceAndAppend = (answer) => {
     const div = document.createElement("div");
     const button = document.createElement("button");
-    button.setAttribute(answer);
+    button.setAttribute("data-answer", answer);
     //add text content to the button
     button.textContent = answer;
     //append answer buttons to the div
-    div.appendChild("data-answer", button);
+    div.appendChild(button);
     parentDiv.appendChild(div);
   };
+
   answers.forEach(createAnswerChoiceAndAppend);
-  console.log(parentDiv);
+  return parentDiv;
 };
 
-const verifyAnswer = () => {};
+// function to verify answer choice
+const verifyAnswer = (event) => {
+  //add property to check when only clicked on the button
+  const target = event.target;
+  const currentTarget = event.currentTarget;
+
+  //verifies the answer given
+  if (target.matches("button")) {
+    const answer = target.getAttribute("data-answer");
+    const correctAnswer = currentTarget.getAttribute("data-answer");
+    if (answer === correctAnswer) {
+      index += 1;
+      //remove current question and display next
+    } else {
+      alert("Not the right answer!");
+    }
+  }
+};
+
 //here function to create div element for quiz content
 const createQuizContainer = (quizQuestion) => {
+  console.log(quizQuestion);
   // create and append div for questions screen
   const divQuizContainer = document.createElement("div");
   divQuizContainer.setAttribute("id", "quiz - start");
-  divQuizContainer.setAttribute(quizQuestions.correctAnswer);
+  divQuizContainer.setAttribute("data-answer", quizQuestion.correctAnswer);
 
   //create and append heading question
   const questionContent = document.createElement("h2");
@@ -76,61 +98,51 @@ const createQuizContainer = (quizQuestion) => {
 };
 const renderQuestion = () => {
   //append question container to the dom
-  const questionContainer = createQuizContainer(quizQuestions);
-  quizContainer.appendChild(questionContainer);
+  if (index < quizQuestions.length) {
+    const questionContainer = createQuizContainer(quizQuestions[index]);
+    quizContainer.appendChild(questionContainer);
+  }
+  //ADDED NEW
+  return renderQuestion;
 };
-
-// // here declare build quiz function
-// buildSubmitScoresForm = () => {
-//   //create div container
-//   const divForm = document.createElement("div");
-//   divForm.setAttribute("class", "quiz - start");
-//   //create heading question
-//   const headingForm = document.createElement("h2");
-//   divForm.appendChild(headingForm);
-//   headingForm.setAttribute("class", "quiz - heading");
-//   //create div info submit scores
-//   const infoSubmit = document.createElement("div");
-//   divForm.appendChild(infoSubmit);
-//   infoSubmit.setAttribute("class", "quiz - text");
-//   //create input name and score
-//   const inputScore = document.createElement("input");
-//   divForm.appendChild(inputScore);
-//   // create submit scores button
-//   const submitScoreButton = document.createElement("button");
-//   divForm.appendChild(submitScoreButton);
-// };
-
-/* create countdown function*/
-const startQuiz = () => {
-  //remove start quiz div from the DOM
-  quizContainer.removeChild(startQuizScreen);
-
-  quizQuestions.forEach(renderQuestion);
-
+const buildSubmitScoresForm = () => {
+  //create div container
+  const divForm = document.createElement("div");
+  divForm.setAttribute("class", "quiz - start");
+  //create heading question
+  const headingForm = document.createElement("h2");
+  divForm.appendChild(headingForm);
+  headingForm.setAttribute("class", "quiz - heading");
+  //create div info submit scores
+  const infoSubmit = document.createElement("div");
+  divForm.appendChild(infoSubmit);
+  infoSubmit.setAttribute("class", "quiz - text");
+  //create input name and score
+  const inputScore = document.createElement("input");
+  divForm.appendChild(inputScore);
+  // create submit scores button
+  const submitScoreButton = document.createElement("button");
+  divForm.appendChild(submitScoreButton);
+  return buildSubmitScoresForm;
+};
+// here declare function to start timer
+const StartTimer = () => {
   const callback = function () {
     if (timeValue >= 0) {
       timerQuiz.textContent = timeValue;
       timeValue -= 1;
     } else if (timeValue < 0) {
-      clearInterval(callback);
+      clearInterval(timeAnswerQuestion);
+      //ADDED NEW
+      quizContainer.removeChild(questionContainer);
+      quizContainer.appendChild(buildSubmitScoresForm);
     }
   };
   const timeAnswerQuestion = setInterval(callback, 1000);
 };
-
-// add event listener to start the quiz and timer
+const startQuiz = () => {
+  //remove start quiz div from the DOM
+  quizContainer.removeChild(startQuizScreen);
+  renderQuestion();
+};
 startQuizButton.addEventListener("click", startQuiz);
-
-// when users presses right answer, change question, vAriable that stores
-
-// add function to count the number of correct answers
-// countTotalScore = () => {
-//   counterSpan.textContent = count;
-// };
-
-// add event listener and function to check for the answer when answer button clicked
-// buttonAnswer.addEventListener("click", verifyAnswer);
-// const verifyAnswer = () => {
-//   // here check if answer is correct, if yes counter incremented by one and if not display wrong message
-// };
