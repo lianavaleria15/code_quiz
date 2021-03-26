@@ -7,7 +7,8 @@ const header = document.getElementById("header-container");
 const bodyEl = document.body;
 
 //initialize timer value and index value for array of questions
-let timeValue = 5;
+let timeValue = 60;
+let score = 0;
 let index = 0;
 
 //store my questions in arrays
@@ -19,22 +20,22 @@ const quizQuestions = [
   },
 
   {
-    question1: "Question1?",
+    question: "Question2?",
     answers: ["answer1", "answer2", "answer3", "answer4"],
     correctAnswer: "answer1",
   },
   {
-    question1: "Question1?",
+    question: "Question3?",
     answers: ["answer1", "answer2", "answer3", "answer4"],
     correctAnswer: "answer4",
   },
   {
-    question: "Question1?",
+    question: "Question4?",
     answers: ["answer1", "answer2", "answer3", "answer4"],
     correctAnswer: "answer3",
   },
   {
-    question: "Question1?",
+    question: "Question5?",
     answers: ["answer1", "answer2", "answer3", "answer4"],
     correctAnswer: "answer1",
   },
@@ -64,14 +65,25 @@ const createAnswerChoices = (answers) => {
 const verifyAnswer = (event) => {
   //add property to check when only clicked on the button
   const target = event.target;
-  const currentTarget = event.currentTarget;
+  const questionContainer = event.currentTarget;
 
   //verifies the answer given
   if (target.matches("button")) {
     const answer = target.getAttribute("data-answer");
-    const correctAnswer = currentTarget.getAttribute("data-answer");
+    const correctAnswer = questionContainer.getAttribute("data-answer");
+    console.log(target);
+    console.log(questionContainer);
     if (answer === correctAnswer) {
       index += 1;
+      // if no more questions stops the timer
+      if (index >= quizQuestions.length) {
+        score = timeValue;
+        timeValue = 0;
+      } else {
+        //What do I remove? Stuck
+        quizContainer.removeChild(document.getElementById("quiz-start"));
+        renderQuestion();
+      }
       //remove current question and display next
     } else {
       alert("Not the right answer!");
@@ -81,10 +93,10 @@ const verifyAnswer = (event) => {
 
 //here function to create div element for quiz content
 const createQuizContainer = (quizQuestion) => {
-  console.log(quizQuestion);
+  // console.log(quizQuestion);
   // create and append div for questions screen
   const divQuizContainer = document.createElement("div");
-  divQuizContainer.setAttribute("id", "quiz - start");
+  divQuizContainer.setAttribute("id", "quiz-start");
   divQuizContainer.setAttribute("data-answer", quizQuestion.correctAnswer);
 
   //create and append heading question
@@ -102,40 +114,42 @@ const renderQuestion = () => {
     const questionContainer = createQuizContainer(quizQuestions[index]);
     quizContainer.appendChild(questionContainer);
   }
-  //ADDED NEW
   return renderQuestion;
 };
 const buildSubmitScoresForm = () => {
   //create div container
   const divForm = document.createElement("div");
-  divForm.setAttribute("class", "quiz - start");
+  divForm.setAttribute("class", "form-container");
   //create heading question
   const headingForm = document.createElement("h2");
+  headingForm.textContent = "Your score is" + score;
   divForm.appendChild(headingForm);
-  headingForm.setAttribute("class", "quiz - heading");
+  headingForm.setAttribute("class", "form - heading");
   //create div info submit scores
   const infoSubmit = document.createElement("div");
   divForm.appendChild(infoSubmit);
-  infoSubmit.setAttribute("class", "quiz - text");
+  infoSubmit.setAttribute("class", "form-text");
   //create input name and score
   const inputScore = document.createElement("input");
   divForm.appendChild(inputScore);
   // create submit scores button
   const submitScoreButton = document.createElement("button");
   divForm.appendChild(submitScoreButton);
-  return buildSubmitScoresForm;
+  return divForm;
 };
 // here declare function to start timer
-const StartTimer = () => {
+const startTimer = () => {
   const callback = function () {
     if (timeValue >= 0) {
       timerQuiz.textContent = timeValue;
       timeValue -= 1;
     } else if (timeValue < 0) {
       clearInterval(timeAnswerQuestion);
-      //ADDED NEW
-      quizContainer.removeChild(questionContainer);
-      quizContainer.appendChild(buildSubmitScoresForm);
+      //replace quiz container with score forms
+
+      quizContainer.removeChild(document.getElementById("quiz-start"));
+      const submitScoresForm = buildSubmitScoresForm();
+      quizContainer.appendChild(submitScoresForm);
     }
   };
   const timeAnswerQuestion = setInterval(callback, 1000);
@@ -144,5 +158,7 @@ const startQuiz = () => {
   //remove start quiz div from the DOM
   quizContainer.removeChild(startQuizScreen);
   renderQuestion();
+  //start timer
+  startTimer();
 };
 startQuizButton.addEventListener("click", startQuiz);
