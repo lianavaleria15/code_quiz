@@ -80,7 +80,7 @@ const verifyAnswer = (event) => {
         score = timeValue;
         timeValue = 0;
       } else {
-        //What do I remove? Stuck
+        //remove present question and move to the next
         quizContainer.removeChild(document.getElementById("quiz-start"));
         renderQuestion();
       }
