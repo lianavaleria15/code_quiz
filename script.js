@@ -7,25 +7,25 @@ const header = document.getElementById("header-container");
 const bodyEl = document.body;
 
 //initialize timer value and index value for array of questions
-let timeValue = 60;
+let timeValue = 5;
 let score = 0;
 let index = 0;
 
 //store my questions in arrays
 const quizQuestions = [
   {
-    question: "Question1?",
-    answers: ["answer1", "answer2", "answer3", "answer4"],
-    correctAnswer: "answer2",
+    question: "How do you add an inline comment in Javascript?",
+    answers: ["<!--comment-->", "//comment", "/*comment*/", "<comment>"],
+    correctAnswer: "//comment",
   },
 
   {
-    question: "Question2?",
-    answers: ["answer1", "answer2", "answer3", "answer4"],
-    correctAnswer: "answer1",
+    question: "What will the code return? Boolean(3<7)",
+    answers: ["true", "SyntaxError", "false", "NaN"],
+    correctAnswer: "true",
   },
   {
-    question: "Question3?",
+    question: "How do you link a javascript file to html?",
     answers: ["answer1", "answer2", "answer3", "answer4"],
     correctAnswer: "answer4",
   },
@@ -45,11 +45,13 @@ const quizQuestions = [
 //create a function to display the answer choices
 const createAnswerChoices = (answers) => {
   const parentDiv = document.createElement("div");
+  parentDiv.setAttribute("class", "answer-button");
 
   const createAnswerChoiceAndAppend = (answer) => {
     const div = document.createElement("div");
     const button = document.createElement("button");
     button.setAttribute("data-answer", answer);
+    button.setAttribute("class", "question-answer");
     //add text content to the button
     button.textContent = answer;
     //append answer buttons to the div
@@ -101,6 +103,7 @@ const createQuizContainer = (quizQuestion) => {
 
   //create and append heading question
   const questionContent = document.createElement("h2");
+  questionContent.setAttribute("class", "question-heading");
   questionContent.textContent = quizQuestion.question;
 
   const answerChoices = createAnswerChoices(quizQuestion.answers);
@@ -120,23 +123,41 @@ const buildSubmitScoresForm = () => {
   //create div container
   const divForm = document.createElement("div");
   divForm.setAttribute("class", "form-container");
+
   //create heading question
   const headingForm = document.createElement("h2");
-  headingForm.textContent = "Your score is" + score;
+  headingForm.textContent = "Your score is" + "" + score;
   divForm.appendChild(headingForm);
-  headingForm.setAttribute("class", "form - heading");
+  headingForm.setAttribute("class", "form-heading");
+
   //create div info submit scores
   const infoSubmit = document.createElement("div");
+  infoSubmit.setAttribute("class", "form-text");
+  infoSubmit.textContent =
+    "Congratulations! You reached the end of the quiz. Please enter your 2 initials and score below.";
   divForm.appendChild(infoSubmit);
   infoSubmit.setAttribute("class", "form-text");
+
   //create input name and score
   const inputScore = document.createElement("input");
+  inputScore.setAttribute("class", "input-score");
+  inputScore.placeholder = "Name initials and final score here";
   divForm.appendChild(inputScore);
+
   // create submit scores button
   const submitScoreButton = document.createElement("button");
+  submitScoreButton.setAttribute("class", "submit-score-button");
+  submitScoreButton.textContent = "Submit my score";
   divForm.appendChild(submitScoreButton);
   return divForm;
+  //create function "submit score" and addevent listener on the button
 };
+
+//create function to store input in local storage
+
+//add event listener on submit form button
+submitScoreButton.addEventListener("click, saveHigherScore");
+
 // here declare function to start timer
 const startTimer = () => {
   const callback = function () {
