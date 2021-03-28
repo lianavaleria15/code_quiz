@@ -12,7 +12,7 @@ const clearHighScores = () => {
 };
 
 //initialise array to display highest scores
-const highestScores = [];
+let highestScores = [];
 
 //here add scores from local storage into html file TO DO (GET INTO HTML, TRANSLATE INTO JAVASCRIPT, take final div and append to the page)
 const renderHighScores = () => {
@@ -42,7 +42,7 @@ const getFromLocalStorage = () => {
 
 const init = () => {
   //
-  const highestScores = localStorage.getItem("highest-score");
+  const higherScore = localStorage.getItem("highest-score");
   renderHighScores();
 };
 

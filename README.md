@@ -32,3 +32,13 @@ In this project I create a timed code quiz verifying Javascript knowledge. The q
 Click [here](https://lianavaleria15.github.io/code_quiz/) to view the deployed application.
 
 ## Screenshots
+
+![code quiz 1](./assets/screenshots/code1.png)
+
+![code quiz 2](./assets/screenshots/code2.png)
+
+![code quiz 3](./assets/screenshots/code3.png)
+
+![code quiz 4](./assets/screenshots/CODE4.png)
+
+![code quiz 5](./assets/screenshots/code5.png)
