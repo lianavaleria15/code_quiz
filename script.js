@@ -182,24 +182,32 @@ const EndQuiz = () => {
     const highestscore = score;
     const highestScoreObject = {
       initials: initials,
-      higestscore: highestscore,
+      highestscore: highestscore,
     };
 
     // transform object to a string and add to local storage
-    const highestScoreObjectString = JSON.stringify(highestScoreObject);
+    let highestScoreObjectString = JSON.stringify(highestScoreObject);
     localStorage.setItem("highest score", highestScoreObjectString);
+
+    // add the next highest score if higher than the value already stored
+    if (score > highestScoreObject) {
+      localStorage.setItem("highest score", score);
+    }
   };
   //move this on at the end of the function
   submitButton.addEventListener("click", onSubmitScoreClick);
 };
+
 // here declare function to start timer
 const startTimer = () => {
   const callback = function () {
-    if (timeValue >= 0) {
+    // if timer
+    if (timeValue > 0) {
       timerQuiz.textContent = timeValue;
       timeValue -= 1;
-    } else if (timeValue < 0 || index > length.quizQuestions) {
-      score = timeValue;
+    }
+    //if timer is zero end quiz
+    if (timeValue === 0 || index > length.quizQuestions) {
       EndQuiz();
       clearInterval(timeAnswerQuestion);
     }
@@ -212,6 +220,7 @@ const startQuiz = () => {
   quizContainer.removeChild(startQuizScreen);
   renderQuestion();
   //start timer
+  timerQuiz.textContent = timer;
   startTimer();
 };
 
