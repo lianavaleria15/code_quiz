@@ -141,22 +141,52 @@ const buildSubmitScoresForm = () => {
   //create input name and score
   const inputScore = document.createElement("input");
   inputScore.setAttribute("class", "input-score");
+  inputScore.setAttribute("id", "initials-score");
   inputScore.placeholder = "Name initials and final score here";
   divForm.appendChild(inputScore);
 
   // create submit scores button
   const submitScoreButton = document.createElement("button");
   submitScoreButton.setAttribute("class", "submit-score-button");
-  submitScoreButton.textContent = "Submit my score";
+  submitScoreButton.textContent = "Submit score";
   divForm.appendChild(submitScoreButton);
   return divForm;
-  //create function "submit score" and addevent listener on the button
 };
 
-//create function to store input in local storage
+// create function to display message when submit score button is clicked
+const displayMessage = (type, message) => {
+  msgDiv.textContent = message;
+  msgDiv.setAttribute("class", type);
+};
 
-//add event listener on submit form button
-submitScoreButton.addEventListener("click, saveHigherScore");
+// create function on submit score click
+const OnSubmitScoreClick = (event) => {
+  event.preventDefault();
+
+  //get initials and score from input box
+  const initialsAndScore = document.querySelector("initials-score").value;
+
+  //call function display message if information was stored to local storage
+  if (initialsAndScore === "") {
+    displayMessage("error", "Input cannot be blank");
+  } else {
+    displayMessage("success", "Initials and score registered successfully");
+  }
+};
+submitScoreButton.addEventListener("click", "renderScore");
+
+// //create function to read from local storage
+// const renderHighScore = () => {
+//   //store input under a key name
+//   const highScore = localStorage.getItem("final-score");
+
+//   //if score was logged, display initials and score
+//   if (highScore) {
+//   }
+// };
+// renderHighScore();
+
+// // //add event listener on submit form button
 
 // here declare function to start timer
 const startTimer = () => {
