@@ -4,7 +4,6 @@ const quizContainer = document.getElementById("quiz-container");
 const startQuizButton = document.getElementById("start-quiz-button");
 const startQuizScreen = document.getElementById("quiz-start");
 const header = document.getElementById("header-container");
-const msgDiv = document.querySelector("#msg");
 
 //initialize timer value and index value for array of questions
 let timeValue = 60;
@@ -135,14 +134,17 @@ const renderQuestion = () => {
   }
   return renderQuestion;
 };
-const buildSubmitScoresForm = () => {
+
+const EndQuiz = () => {
   //create div container
+  quizContainer.children[0].remove();
   const divForm = document.createElement("div");
   divForm.setAttribute("class", "form-container");
+  quizContainer.appendChild(divForm);
 
   //create heading question
   const headingForm = document.createElement("h2");
-  headingForm.textContent = "Your score is" + "" + score;
+  headingForm.textContent = "Your score is " + score;
   divForm.appendChild(headingForm);
   headingForm.setAttribute("class", "form-heading");
 
@@ -150,7 +152,7 @@ const buildSubmitScoresForm = () => {
   const infoSubmit = document.createElement("div");
   infoSubmit.setAttribute("class", "form-text");
   infoSubmit.textContent =
-    "Congratulations! You reached the end of the quiz. Please enter your 2 initials and score below.";
+    "Congratulations! Please enter your 2 initials below.";
   divForm.appendChild(infoSubmit);
   infoSubmit.setAttribute("class", "form-text");
 
@@ -166,48 +168,30 @@ const buildSubmitScoresForm = () => {
   submitScoreButton.setAttribute("class", "submit-score-button");
   submitScoreButton.setAttribute("id", "submit-score");
   submitScoreButton.textContent = "Submit score";
+
   divForm.appendChild(submitScoreButton);
-  return divForm;
+
+  const submitButton = document.getElementById("submit-score");
+
+  // create function to read values from global memory and add in local storage
+  const onSubmitScoreClick = (event) => {
+    event.preventDefault();
+
+    //store initials and score from input box in the local storage
+    const initials = inputScore.value;
+    const highestscore = score;
+    const highestScoreObject = {
+      initials: initials,
+      higestscore: highestscore,
+    };
+
+    // transform object to a string and add to local storage
+    const highestScoreObjectString = JSON.stringify(highestScoreObject);
+    localStorage.setItem("highest score", highestScoreObjectString);
+  };
+  //move this on at the end of the function
+  submitButton.addEventListener("click", onSubmitScoreClick);
 };
-const submitButton = document.getElementById("submit-score");
-
-// create function to read from local storage
-const renderHighScore = () => {
-  //store input under a key name
-  const highScore = localStorage.getItem("final-score");
-
-  //if score was logged, display initials and score
-  if (highScore) {
-  }
-};
-
-// create function to display message when submit score button is clicked
-const displayMessage = (type, message) => {
-  msgDiv.textContent = message;
-  msgDiv.setAttribute("class", type);
-};
-
-// create function on submit score click
-const OnSubmitScoreClick = (event) => {
-  event.preventDefault();
-
-  //store initials and score from input box in the local storage
-  let initialsAndScore = document.getElementById("initials-score").value;
-  //call function display message if information was stored to local storage
-  if (initialsAndScore === "") {
-    displayMessage("error", "Input cannot be blank");
-  } else {
-    displayMessage("success", "Initials and score registered successfully");
-    localStorage.setItem("highScore", initialsAndScore);
-    submitButton.addEventListener("click", OnSubmitScoreClick);
-  }
-  //if input completed, store in local storage
-
-  //add event listener on submit form button
-};
-
-renderHighScore();
-
 // here declare function to start timer
 const startTimer = () => {
   const callback = function () {
@@ -215,11 +199,9 @@ const startTimer = () => {
       timerQuiz.textContent = timeValue;
       timeValue -= 1;
     } else if (timeValue < 0 || index > length.quizQuestions) {
+      score = timeValue;
+      EndQuiz();
       clearInterval(timeAnswerQuestion);
-      //replace quiz container with score forms
-      quizContainer.removeChild(document.getElementById("quiz-start"));
-      const submitScoresForm = buildSubmitScoresForm();
-      quizContainer.appendChild(submitScoresForm);
     }
   };
   const timeAnswerQuestion = setInterval(callback, 1000);

@@ -52,17 +52,3 @@
   padding: 1rem;
   margin: 0.5rem;
 }
-#msg {
-  visibility: hidden;
-  margin-top: 1rem;
-}
-#msg.success,
-#msg.error {
-  visibility: visible;
-}
-#msg.success {
-  color: #008000;
-}
-#msg.error {
-  color: #ff0000;
-}
