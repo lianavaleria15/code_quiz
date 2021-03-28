@@ -4,7 +4,7 @@ const quizContainer = document.getElementById("quiz-container");
 const startQuizButton = document.getElementById("start-quiz-button");
 const startQuizScreen = document.getElementById("quiz-start");
 const header = document.getElementById("header-container");
-const bodyEl = document.body;
+const msgDiv = document.querySelector("#msg");
 
 //initialize timer value and index value for array of questions
 let timeValue = 5;
@@ -89,6 +89,7 @@ const verifyAnswer = (event) => {
       //remove current question and display next
     } else {
       alert("Not the right answer!");
+      timeValue = timeValue - 5;
     }
   }
 };
@@ -148,9 +149,21 @@ const buildSubmitScoresForm = () => {
   // create submit scores button
   const submitScoreButton = document.createElement("button");
   submitScoreButton.setAttribute("class", "submit-score-button");
+  submitScoreButton.setAttribute("id", "submit-score");
   submitScoreButton.textContent = "Submit score";
   divForm.appendChild(submitScoreButton);
   return divForm;
+};
+const submitButton = document.getElementById("submit-score");
+
+//create function to read from local storage
+const renderHighScore = () => {
+  //store input under a key name
+  const highScore = localStorage.getItem("final-score");
+
+  //if score was logged, display initials and score
+  // if (highScore) {
+  // }
 };
 
 // create function to display message when submit score button is clicked
@@ -164,7 +177,7 @@ const OnSubmitScoreClick = (event) => {
   event.preventDefault();
 
   //get initials and score from input box
-  const initialsAndScore = document.querySelector("initials-score").value;
+  const initialsAndScore = document.getElementById("initials-score").value;
 
   //call function display message if information was stored to local storage
   if (initialsAndScore === "") {
@@ -172,21 +185,13 @@ const OnSubmitScoreClick = (event) => {
   } else {
     displayMessage("success", "Initials and score registered successfully");
   }
+  //if input completed, store in local storage
+  localStorage.setItem("highScore", initialsAndScore);
+  //add event listener on submit form button
+  submitButton.addEventListener("click", OnSubmitScoreClick);
 };
-submitScoreButton.addEventListener("click", "renderScore");
 
-// //create function to read from local storage
-// const renderHighScore = () => {
-//   //store input under a key name
-//   const highScore = localStorage.getItem("final-score");
-
-//   //if score was logged, display initials and score
-//   if (highScore) {
-//   }
-// };
-// renderHighScore();
-
-// // //add event listener on submit form button
+renderHighScore();
 
 // here declare function to start timer
 const startTimer = () => {
@@ -194,14 +199,11 @@ const startTimer = () => {
     if (timeValue >= 0) {
       timerQuiz.textContent = timeValue;
       timeValue -= 1;
-    } else if (timeValue < 0) {
+    } else if (timeValue === 0 || index > 5) {
       clearInterval(timeAnswerQuestion);
       //replace quiz container with score forms
-
-      quizContainer.removeChild(document.getElementById("quiz-start"));
-      const submitScoresForm = buildSubmitScoresForm();
-      quizContainer.appendChild(submitScoresForm);
-    }
+      buildSubmitScoresForm();
+     
   };
   const timeAnswerQuestion = setInterval(callback, 1000);
 };
