@@ -193,6 +193,8 @@ const EndQuiz = () => {
     if (score > highestScoreObject) {
       localStorage.setItem("highest score", score);
     }
+    //add link to navigate to highscore page
+    window.location.href = "./high-scores.html";
   };
   //move this on at the end of the function
   submitButton.addEventListener("click", onSubmitScoreClick);
