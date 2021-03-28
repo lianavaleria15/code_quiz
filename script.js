@@ -25,19 +25,34 @@ const quizQuestions = [
     correctAnswer: "true",
   },
   {
-    question: "How do you link a javascript file to html?",
-    answers: ["answer1", "answer2", "answer3", "answer4"],
-    correctAnswer: "answer4",
+    question: " What is the syntax to link a javascript file to html?",
+    answers: [
+      "<javascript></javascript>",
+      "<java></java>",
+      "<script java></script java>",
+      "<script></script>",
+    ],
+    correctAnswer: "<script></script>",
   },
   {
-    question: "Question4?",
-    answers: ["answer1", "answer2", "answer3", "answer4"],
-    correctAnswer: "answer3",
+    question: "What is the correct syntax to declare a Javascript array?",
+    answers: [
+      "const abc = {'x', 'y', 'z'}",
+      "array abc = ('x', 'y', 'z')",
+      "const abc = ['x', 'y', 'z']",
+      "array abc = {'x', 'y', 'z'}",
+    ],
+    correctAnswer: "const abc = ['x', 'y', 'z']",
   },
   {
-    question: "Question5?",
-    answers: ["answer1", "answer2", "answer3", "answer4"],
-    correctAnswer: "answer1",
+    question: "How does a FOR loop start?",
+    answers: [
+      "for (i=0; i<=5; i++)",
+      "for i=1 to 5",
+      "for (i=0 or i<=5",
+      "for i <=5; i++",
+    ],
+    correctAnswer: "for (i=0; i<=5; i++)",
   },
 ];
 /* create countdown function*/
@@ -176,17 +191,17 @@ const displayMessage = (type, message) => {
 const OnSubmitScoreClick = (event) => {
   event.preventDefault();
 
-  //get initials and score from input box
-  const initialsAndScore = document.getElementById("initials-score").value;
-
+  //store initials and score from input box in the local storage
+  let initialsAndScore = document.getElementById("initials-score").value;
   //call function display message if information was stored to local storage
   if (initialsAndScore === "") {
     displayMessage("error", "Input cannot be blank");
   } else {
     displayMessage("success", "Initials and score registered successfully");
+    localStorage.setItem("highScore", initialsAndScore);
   }
   //if input completed, store in local storage
-  localStorage.setItem("highScore", initialsAndScore);
+
   //add event listener on submit form button
   submitButton.addEventListener("click", OnSubmitScoreClick);
 };
@@ -203,10 +218,11 @@ const startTimer = () => {
       clearInterval(timeAnswerQuestion);
       //replace quiz container with score forms
       buildSubmitScoresForm();
-     
+    }
+    const timeAnswerQuestion = setInterval(callback, 1000);
   };
-  const timeAnswerQuestion = setInterval(callback, 1000);
 };
+//here start quiz function
 const startQuiz = () => {
   //remove start quiz div from the DOM
   quizContainer.removeChild(startQuizScreen);
@@ -214,4 +230,5 @@ const startQuiz = () => {
   //start timer
   startTimer();
 };
+
 startQuizButton.addEventListener("click", startQuiz);
