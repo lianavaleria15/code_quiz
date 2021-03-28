@@ -13,17 +13,17 @@ const clearHighScores = () => {
 
 //function to read from local storage and store in a declared variable
 const getFromLocalStorage = () => {
-  const highScores = localStorage.getItem("highScores");
-  if (highScores) {
-    return highScores;
+  const highestscore = localStorage.getItem("highest-score");
+  if (highestscore) {
+    return highestscore;
   } else {
     return [];
   }
 };
 
 //here add scores from local storage into html file TO DO (GET INTO HTML, TRANSLATE INTO JAVASCRIPT, take final div and append to the page)
-const renderHighScores = (highScores) => {
-  if (highScores) {
+const renderHighScores = (highestscore) => {
+  if (highestscore) {
     console.log("empty"); //display empty table
   } else {
     console.log("create table");

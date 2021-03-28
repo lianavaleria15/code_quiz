@@ -187,11 +187,11 @@ const EndQuiz = () => {
 
     // transform object to a string and add to local storage
     let highestScoreObjectString = JSON.stringify(highestScoreObject);
-    localStorage.setItem("highest score", highestScoreObjectString);
+    localStorage.setItem("highest-score", highestScoreObjectString);
 
     // add the next highest score if higher than the value already stored
     if (score > highestScoreObject) {
-      localStorage.setItem("highest score", score);
+      localStorage.setItem("highest-score", score);
     }
     //add link to navigate to highscore page
     window.location.href = "./high-scores.html";
